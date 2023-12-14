@@ -369,6 +369,33 @@
                 </div>
             </div>
         </section>
+        <section id="cont" class="">
+            <div class = "cv-form-row-title">
+                <h3><i class="fa-solid fa-phone"></i>  Contact</h3>
+            </div>
+            <div class="container2">
+                
+                <div class="row">
+                    <div class="contact-left fw-5 fs-16">
+                        <p><i class="fa-solid fa-envelope"></i>  contact@example.com</p>
+                        <p><i class="fa-solid fa-phone"></i>  0123456789</p>
+                        <div class="social-icons">
+                            <a href=""><i class="fa-brands fa-facebook"></i></a>
+                            <a href=""><i class="fa-brands fa-instagram"></i></a>
+                            <a href=""><i class="fa-brands fa-linkedin"></i></a>
+                        </div></div>
+                    <div class="contact-right">
+                        <form name="submit-to-google-sheet">
+                            <input type="text" name="Name" placeholder="Your Name" required>
+                            <input type="email" name="Email" placeholder="Your Email" required>
+                            <textarea name="Message"  rows="6" placeholder="Your Message"></textarea>
+                            <button type="submit" class="btn btn2"> Submit</button>
+                            <span id="msg"> </span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <section class = "print-btn-sc">
             <div class = "container">
@@ -387,5 +414,23 @@
         <script src = "assets/js/script.js"></script>
         <!-- app js -->
         <script src="assets/js/app.js"></script>
+        <script>
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyDd2F7RSHNOJe9rOpIXvCfaJ-84jq5ojAxTPulzwEsr9GJCY9x7xcqfP4CY1yKIa6zjA/exec'
+            const form = document.forms['submit-to-google-sheet']
+            const msg=document.getElementById("msg") /* changes made*/
+          
+            form.addEventListener('submit', e => {
+              e.preventDefault()
+              fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response =>{
+                    msg.innerHTML="Succesfully submitted ;)"/* changes made*/
+                    setTimeout(function(){/* changes made*/
+                        msg.innerHTML=" "/* changes made*/
+                    },4000)/* changes made*/
+                    form.reset()/* changes made*/
+                })
+                .catch(error => console.error('Error!', error.message))
+            })
+          </script>
     </body>
 </html>
